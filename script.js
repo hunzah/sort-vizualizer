@@ -79,26 +79,11 @@ const init = async() => {
       case "Odd Even Sort":
         await oddEvenSort(arr);
         break;
-      case "Insertion Sort":
-        await insertionSort(arr);
-        break;
-      case "Selection Sort":
-        await selectionSort(arr);
-        break;
       case "Quick Sort":
         await quickSort(arr, 0, arr.length - 1);
         break;
-      case "Comp Sort":
-        await compSort(arr);
-        break;
       case "Shell Sort":
         await shellSort(arr);
-        break;
-      case "Cocktail shaker Sort":
-        await cocktailShakerSort(arr);
-        break;
-      case "Counting Sort":
-        await countingSort(arr);
         break;
       default:
         break;
