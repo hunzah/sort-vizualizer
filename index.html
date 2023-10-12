@@ -16,7 +16,9 @@
             <option class="opt">Choose algorithm...</option>
             <option class="opt" id="bubblesortOption">Bubble Sort</option>
             <option class="opt" id="oddevensortOption">Odd Even Sort</option>
-          </select>
+            <option class="opt" id="oddevensortOption">Quick Sort</option>
+            <option class="opt" id="oddevensortOption">Shell Sort</option>   
+        </select>
         </div>
         <div>
           <label for="selectAlgo">Speed</label>
@@ -27,10 +29,13 @@
           </div>
         </div>
       </div>
+      <button id="pauseResume">Пауза</button>
     </div>
     <canvas></canvas>
     <script src="./src/sort-functions/bubble-sort.js"></script>
     <script src="./src/sort-functions/oddEvenSort.js"></script>
+    <script src="./src/sort-functions/quickSort.js"></script>
+    <script src="./src/sort-functions/shell-sort.js"></script>
     <script src="./script.js" defer></script>
   </body>
 </html>
