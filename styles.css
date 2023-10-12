@@ -49,3 +49,16 @@ select:focus {
 select:hover {
     cursor: pointer;
 }
+
+#pauseResume {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+    display: inline-block;
+    width: 263px;
+    height: 54px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: #FFFFFF;
+    background: linear-gradient(90deg, #4776E6 0%, #8E54E9 100%);
+}
