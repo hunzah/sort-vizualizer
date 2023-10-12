@@ -130,5 +130,24 @@ pauseResumeButton.addEventListener("click", () => {
   }
 });
 
+// Переменная для остановки и возобновления сортировки 
+// Прописана тут и используется во всех файлах для сортировки, что бы избежать дублирования кода
+
+async function checkPause() { // Приостанавливаем сортировку, если флаг isPaused установлен в true
+  if (window.isPaused) {
+    await new Promise((resolve) => {
+      const checkPaused = () => {
+        if (!window.isPaused) {
+          resolve();
+        } else {
+          setTimeout(checkPaused, 100); 
+        }
+      };
+      checkPaused();
+    });
+  }
+}
+
+
 init();
 animate();

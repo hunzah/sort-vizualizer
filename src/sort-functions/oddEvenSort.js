@@ -9,18 +9,8 @@ async function oddEvenSort(arr) {
       sorted = true
       for (let i = 1; i < arr.length - 1; i += 2) {
 
-        if (isPaused) { // Приостанавливаем сортировку, если флаг isPaused установлен в true
-          await new Promise((resolve) => {
-            const checkPaused = () => {
-              if (!isPaused) {
-                resolve();
-              } else {
-                setTimeout(checkPaused, 100); // Проверяем каждые 100 миллисекунд
-              }
-            };
-            checkPaused();
-          });
-        }
+      // Вызываем функцию паузы она сработает при нажатии на кнопку
+      await checkPause()
 
         if (arr[i].h > arr[i + 1].h) {
           colorBars(arr[i], arr[i + 1])

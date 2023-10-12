@@ -10,20 +10,8 @@ async function quickSort(arr, lo, hi) {
     let i = lo - 1
     let j = hi + 1
     while (1) {
-      
-      if (isPaused) { // Приостанавливаем сортировку, если флаг isPaused установлен в true
-        await new Promise((resolve) => {
-          const checkPaused = () => {
-            if (!isPaused) {
-              resolve();
-            } else {
-              setTimeout(checkPaused, 100); // Проверяем каждые 100 миллисекунд
-            }
-          };
-          checkPaused();
-        });
-      }
-
+      // Вызываем функцию паузы она сработает при нажатии на кнопку
+      await checkPause()
       do {
         i++
       }
