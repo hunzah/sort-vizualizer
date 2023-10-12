@@ -10,19 +10,6 @@ const barColor = "#cb11ab"; // Цвет столбцов
 const iColor = 'white'; // Цвет активного столбца i
 const jColor = '#007aff'; // Цвет активного столбца j
 
-//переменная для отслеживания состояния паузы
-let isPaused = false;
-
-const pauseResumeButton = document.querySelector("#pauseResume");
-pauseResumeButton.addEventListener("click", () => {
-  isPaused = !isPaused; // Изменяем состояние паузы при нажатии на кнопку
-  if (isPaused) {
-    pauseResumeButton.innerText = "Возобновить"; // Измените текст кнопки
-  } else {
-    pauseResumeButton.innerText = "Пауза"; // Измените текст кнопки
-  }
-});
-
 let ms = delay.value;  // Задержка в миллисекундах
 
 let arr = []; // Массив для хранения значений столбцов
