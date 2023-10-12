@@ -114,5 +114,21 @@ const windowResize = () => {
 // Обработчик события изменения размера окна
 window.addEventListener('resize', windowResize);
 
+
+// Переменная для отслеживания состояния паузы
+// Сделал ее глобальной для того что бы можно было использовать в разных файлах
+window.isPaused = false;
+
+// Функция для отслеживания состояния паузы
+const pauseResumeButton = document.querySelector("#pauseResume");
+pauseResumeButton.addEventListener("click", () => {
+  window.isPaused = !window.isPaused; // Изменяем состояние паузы при нажатии на кнопку
+  if (window.isPaused) {
+    pauseResumeButton.innerText = "Возобновить"; // Измените текст кнопки на "Возобновить"
+  } else {
+    pauseResumeButton.innerText = "Пауза"; // Измените текст кнопки на "Пауза"
+  }
+});
+
 init();
 animate();
