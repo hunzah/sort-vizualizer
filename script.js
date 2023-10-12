@@ -85,6 +85,9 @@ const init = async() => {
       case "Shell Sort":
         await shellSort(arr);
         break;
+        case "Count Sort":
+          await shellSort(arr);
+          break;
       default:
         break;
     }
