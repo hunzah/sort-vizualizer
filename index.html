@@ -16,13 +16,21 @@
             <option class="opt">Choose algorithm...</option>
             <option class="opt" id="bubblesortOption">Bubble Sort</option>
             <option class="opt" id="oddevensortOption">Odd Even Sort</option>
-
-              Cocktail shaker Sort
-            </option>
-            <option class="opt" id="countingsortOption">Counting Sort</option>
           </select>
-
+        </div>
+        <div>
+          <label for="selectAlgo">Speed</label>
+          <div class="del" style="display: flex">
+            <label for="delay">-</label>
+            <input id="delay" type="range" min="1" max="150" />
+            <label for="delay">+</label>
+          </div>
         </div>
       </div>
     </div>
     <canvas></canvas>
+    <script src="./src/sort-functions/bubble-sort.js"></script>
+    <script src="./src/sort-functions/oddEvenSort.js"></script>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
