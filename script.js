@@ -67,13 +67,12 @@ const draw = () => {
     });
 }
 
-
 // Инициализация обработчиков событий
 const init = async () => {
     select.addEventListener("change", async (e) => {
         select.disabled = true;
         pauseResumeButton.disabled = false;
-
+        pauseResumeButton.innerText = "Pause";
         switch (e.target.value) {
             case "Bubble Sort":
                 await bubbleSort(arr);
