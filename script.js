@@ -20,102 +20,88 @@ let w = (canvas.width - 20) / arr.length;  // Ширина столбцов
 
 // Функция для установки цвета для активных столбцов
 const colorBars = (a, b) => {
-  a.color = iColor;
-  b.color = jColor;
+    a.color = iColor;
+    b.color = jColor;
 }
 
 // Функция для удаления цвета с активных столбцов
 const remColor = (a, b) => {
-  a.color = barColor;
-  b.color = barColor;
+    a.color = barColor;
+    b.color = barColor;
 }
 
 // Функция для создания задержки между шагами анимации
 const sleep = () => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function ran (min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
+function ran(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 // Генерация случайного числа в заданном диапазоне
 function genArr() {
-  arr = [];
-  for (let i = 0; i < 100; i++) {
-    arr.push({
-      h: ran(0, canvas.height),
-      color: barColor,
-    });
-  }
-  select.disabled = false;
-  select.value = "Choose algorithm...";
+    arr = [];
+    for (let i = 0; i < 100; i++) {
+        arr.push({
+            h: ran(0, canvas.height),
+            color: barColor,
+        });
+    }
+    select.disabled = false;
+    select.value = "Choose algorithm...";
 }
 
 // Отрисовка столбцов на холсте
 const draw = () => {
-  let x = 0;
-  arr.forEach((col) => {
-    ctx.beginPath();
-    ctx.rect(x, canvas.height, w, -col.h);
-    ctx.strokeStyle = "#000000";
-    ctx.fillStyle = col.color;
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
-    x = x + w;
-  });
+    let x = 0;
+    arr.forEach((col) => {
+        ctx.beginPath();
+        ctx.rect(x, canvas.height, w, -col.h);
+        ctx.strokeStyle = "#000000";
+        ctx.fillStyle = col.color;
+        ctx.stroke();
+        ctx.fill();
+        ctx.closePath();
+        x = x + w;
+    });
 }
+
 
 // Инициализация обработчиков событий
-const init = async() => {
-      // Обработчик события изменения выбранного алгоритма сортировки
-  select.addEventListener("change", async (e) => {
-    select.disabled = true;
-    switch (e.target.value) {
-      case "Bubble Sort":
-        await bubbleSort(arr);
-        break;
-      case "Odd Even Sort":
-        await oddEvenSort(arr);
-        break;
-      case "Quick Sort":
-        await quickSort(arr, 0, arr.length - 1);
-        break;
-      case "Shell Sort":
-        await shellSort(arr);
-        break;
-        case "Count Sort":
-          await shellSort(arr);
-          break;
-      default:
-        break;
-    }
-    e.target.value = "Choose algorithm...";
-  });
+const init = async () => {
+    select.addEventListener("change", async (e) => {
+        select.disabled = true;
+        pauseResumeButton.disabled = false;
 
-    // Обработчик события изменения значения задержки анимации
-  delay.addEventListener("input", (e) => {
-    ms = 100 - e.target.value;
-  });
+        switch (e.target.value) {
+            case "Bubble Sort":
+                await bubbleSort(arr);
+                break;
+            case "Odd Even Sort":
+                await oddEvenSort(arr);
+                break;
+            case "Quick Sort":
+                await quickSort(arr, 0, arr.length - 1);
+                break;
+            case "Shell Sort":
+                await shellSort(arr);
+                break;
+            case "Count Sort":
+                await shellSort(arr);
+                break;
+            default:
+                break;
+        }
+        e.target.value = "Choose algorithm...";
+        select.disabled = false;
+        pauseResumeButton.disabled = true;
+    });
+
+    delay.addEventListener("input", (e) => {
+        ms = 100 - e.target.value;
+    });
 }
-
-// Анимация отрисовки
-const animate = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  requestAnimationFrame(animate);
-  draw();
-}
-
-// Обновление размеров холста при изменении размера окна
-const windowResize = () => {
-  canvas.width = window.innerWidth - 10;
-  canvas.height = window.innerHeight / 2;
-  w = (canvas.width - 20) / arr.length;
-}
-
-// Обработчик события изменения размера окна
-window.addEventListener('resize', windowResize);
 
 
 // Переменная для отслеживания состояния паузы
@@ -124,31 +110,53 @@ window.isPaused = false;
 
 // Функция для отслеживания состояния паузы
 const pauseResumeButton = document.querySelector("#pauseResume");
+
+// Изначально отключаем кнопку, так как алгоритм еще не выбран
+pauseResumeButton.disabled = true;
+
 pauseResumeButton.addEventListener("click", () => {
-  window.isPaused = !window.isPaused; // Изменяем состояние паузы при нажатии на кнопку
-  if (window.isPaused) {
-    pauseResumeButton.innerText = "Возобновить"; // Измените текст кнопки на "Возобновить"
-  } else {
-    pauseResumeButton.innerText = "Пауза"; // Измените текст кнопки на "Пауза"
-  }
+    window.isPaused = !window.isPaused; // Изменяем состояние паузы при нажатии на кнопку
+    if (window.isPaused) {
+        pauseResumeButton.innerText = "Start"; // Измените текст кнопки на "Возобновить"
+    } else {
+        pauseResumeButton.innerText = "Pause"; // Измените текст кнопки на "Пауза"
+    }
 });
+
+
+// Анимация отрисовки
+const animate = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(animate);
+    draw();
+}
+
+// Обновление размеров холста при изменении размера окна
+const windowResize = () => {
+    canvas.width = window.innerWidth - 10;
+    canvas.height = window.innerHeight / 2;
+    w = (canvas.width - 20) / arr.length;
+}
+
+// Обработчик события изменения размера окна
+window.addEventListener('resize', windowResize);
 
 // Переменная для остановки и возобновления сортировки 
 // Прописана тут и используется во всех файлах для сортировки, что бы избежать дублирования кода
 
 async function checkPause() { // Приостанавливаем сортировку, если флаг isPaused установлен в true
-  if (window.isPaused) {
-    await new Promise((resolve) => {
-      const checkPaused = () => {
-        if (!window.isPaused) {
-          resolve();
-        } else {
-          setTimeout(checkPaused, 100); 
-        }
-      };
-      checkPaused();
-    });
-  }
+    if (window.isPaused) {
+        await new Promise((resolve) => {
+            const checkPaused = () => {
+                if (!window.isPaused) {
+                    resolve();
+                } else {
+                    setTimeout(checkPaused, 100);
+                }
+            };
+            checkPaused();
+        });
+    }
 }
 
 
